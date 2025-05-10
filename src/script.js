@@ -57,27 +57,37 @@ function drawChart(data, to) {
 }
 
 async function updateUI() {
-  const amount = parseFloat(amountInput.value) || 1;
-  const from = fromSelect.value;
-  const to = toSelect.value;
-
-  if (from === to) {
-    convertedInput.value = amount.toFixed(2);
-    exchangeValue.textContent = "1.00";
-    return;
+    const rawAmount = amountInput.value;
+    const amount = parseFloat(rawAmount);
+    const from = fromSelect.value;
+    const to = toSelect.value;
+  
+    // Üst başlık (her zaman 1 birim için gösterilecek)
+    fromText.textContent = fromSelect.options[fromSelect.selectedIndex].text;
+    toText.textContent = toSelect.options[toSelect.selectedIndex].text;
+  
+    // 1 birim için kuru al (üst bilgi için her zaman gerekli)
+    const { value: singleRate } = await fetchRate(from, to, 1);
+    exchangeValue.textContent = singleRate.toFixed(2);
+  
+    // input tamamen silindiyse alt input temizlenir ama üstteki bilgi sabit kalır
+    if (rawAmount === "") {
+      convertedInput.value = "";
+      return;
+    }
+  
+    // sıfırsa alt taraf 0 gösterir
+    if (amount === 0 || from === to) {
+      convertedInput.value = "0";
+      return;
+    }
+  
+    // normal hesaplama
+    const { value } = await fetchRate(from, to, amount);
+    convertedInput.value = value.toFixed(2).replace(".", ",");
+  
+    const historyData = await fetchHistory(from, to);
+    drawChart(historyData, to);
   }
-
-  const { value } = await fetchRate(from, to, amount);
-  const { value: singleRate } = await fetchRate(from, to, 1);
-  const historyData = await fetchHistory(from, to);
-
-  convertedInput.value = value.toFixed(2).replace(".", ",");
-  exchangeValue.textContent = singleRate.toFixed(2);
-  fromText.textContent = fromSelect.options[fromSelect.selectedIndex].text;
-  toText.textContent = toSelect.options[toSelect.selectedIndex].text;
-
-  drawChart(historyData, to);
-}
-
 [fromSelect, toSelect, amountInput].forEach(el => el.addEventListener("input", updateUI));
 window.addEventListener("DOMContentLoaded", updateUI);

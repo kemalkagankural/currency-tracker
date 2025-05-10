@@ -1,0 +1,9 @@
+# node_modules klasörü (gereksiz ve büyük)
+node_modules/
+
+# dotenv dosyası (gizli bilgiler)
+.env
+
+# sistem dosyaları (Mac, VSCode vs.)
+.DS_Store
+.vscode/

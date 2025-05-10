@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Döviz Çevirici</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="converter-container">
+    <p class="headline">1 <span id="fromText">United States Dollar</span> equals</p>
+    <h1><span id="exchangeValue">—</span> <span id="toText">Turkish lira</span></h1>
+    <p class="timestamp">May 9, 20:59 UTC · From Frankfurter</p>
+
+    <div class="input-group">
+      <input type="number" id="amount" value="1" min="0" />
+      <select id="from">
+        <option value="USD">United States Dollar</option>
+        <option value="EUR">Euro</option>
+        <option value="TRY">Turkish Lira</option>
+        <option value="GBP">British Pound</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <input type="text" id="converted" disabled />
+      <select id="to">
+        <option value="TRY">Turkish Lira</option>
+        <option value="USD">United States Dollar</option>
+        <option value="EUR">Euro</option>
+        <option value="GBP">British Pound</option>
+      </select>
+    </div>
+
+    <canvas id="chart" width="600" height="300"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

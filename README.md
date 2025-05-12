@@ -1,6 +1,6 @@
 # 💱 Currency Tracker
 
-A simple currency conversion application. Users can enter an amount and select a base currency to instantly view its equivalent in other currencies. The app fetches live exchange rates from the [exchangerate.host](https://exchangerate.host) API.
+A simple currency conversion application. Users can enter an amount and select a base currency to instantly view its equivalent in other currencies. The app fetches live exchange rates from the [exchangerate.host](https://exchangerate.host)  API.
 
 ## 🚀 Features
 
@@ -17,9 +17,6 @@ A simple currency conversion application. Users can enter an amount and select a
 - **Vanilla JavaScript**
 - **Live Server** (for local development)
 
-## 🖼️ Screenshot
-
-![Screenshot](public/screenshot.png)
 
 ## 📦 Getting Started
 
